@@ -6,13 +6,13 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
-
+	ruby 2.4.1p111
 * System dependencies
-
+	
 * Configuration
 
 * Database creation
-
+	gem 'pg', '~> 0.18'
 * Database initialization
 
 * How to run the test suite
