@@ -1,0 +1,248 @@
+<script src="/assets/jstarbox.js"></script>
+<link rel="stylesheet" href="/assets/jstarbox.css" type="text/css" media="screen" charset="utf-8" />
+<script type="text/javascript" src="/assets/move-top.js"></script>
+<script type="text/javascript" src="/assets/easing.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){		
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});
+</script>
+		<script type="text/javascript">
+			jQuery(function() {
+			jQuery('.starbox').each(function() {
+				var starbox = jQuery(this);
+					starbox.starbox({
+					average: starbox.attr('data-start-value'),
+					changeable: starbox.hasClass('unchangeable') ? false : starbox.hasClass('clickonce') ? 'once' : true,
+					ghosting: starbox.hasClass('ghosting'),
+					autoUpdateAverage: starbox.hasClass('autoupdate'),
+					buttons: starbox.hasClass('smooth') ? false : starbox.attr('data-button-count') || 5,
+					stars: starbox.attr('data-star-count') || 5
+					}).bind('starbox-value-changed', function(event, value) {
+					if(starbox.hasClass('random')) {
+					var val = Math.random();
+					starbox.next().text(' '+val);
+					return val;
+					} 
+				})
+			});
+		});
+		</script>
+<div class="header">
+
+		<div class="container">
+			
+			<div class="logo">
+				<h1 ><a href="/"><b>T<br>H<br>E</b>Sephora<span>Discover The Latest</span></a></h1>
+			</div>
+
+				<div class="nav-top">
+					<nav class="navbar navbar-default">
+					
+					<div class="navbar-header nav_2">
+						<button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						
+
+					</div> 
+					<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+						<ul class="nav navbar-nav ">
+							<li class="active active1"><a href="#" class="hyper "><span>Home</span></a></li>	
+							
+							
+							
+							<li><a href="/about" class="hyper"> <span>About Us</span></a></li>
+							<li><a href="/contact" class="hyper"><span>Contact Us</span></a></li>
+						</ul>
+					</div>
+					</nav>
+					 <div class="cart" >
+					
+						<span class="fa fa-shopping-cart my-cart-icon"><span class="badge badge-notify my-cart-badge"></span></span>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+					
+				</div>			
+</div>
+<!--content-->
+		<div class="product">
+		<div class="container">
+			<div class="spec ">
+				<h3>Products</h3>
+				<div class="ser-t">
+					<b></b>
+					<span><i></i></span>
+					<b class="line"></b>
+				</div>
+			</div>
+			
+            <div class="filters">
+	            <form action="/" method="get" id="filter">
+	            	Filter By: 
+	            	<select name="price" id="price">
+	            		<option value="">Select</option>
+	            		<option value="asc" <%= params[:price] == 'asc' ? 'selected' : ''%>>Low To High</option>
+	            		<option value="desc" <%= params[:price] == 'desc' ? 'selected' : ''%>>High To Low</option>
+	            	</select>
+	            	<select name="category" id="category">
+	            			<option value="">Select</option>
+	            		<%@categories.each do |c|%>
+	            			<option value="<%=c%>" <%= params[:category] == c ? 'selected' : ''%>><%=c%></option>
+	            		<% end %>
+	            	</select>
+	            </form>
+        	</div>
+				<div class=" con-w3l agileinf">
+							<%@products.each do |product|%>
+							<div class="col-md-3 pro-1">
+								<div class="col-m">
+								<a href="#" data-toggle="modal" data-target="#myModal_<%=product.id%>" class="offer-img">
+										<img src="assets/<%=product.image_url%>" class="img-responsive" alt="">
+									</a>
+									<div class="mid-1">
+										<div class="women">
+											<h6><a href="single.html"><%=product.name[0..25]%></a></h6>							
+										</div>
+										<div class="mid-2">
+											<p ><label>$<%=product.price%></label><em class="item_price">$<%=product.sale_price%></em></p>
+											  <div class="block">
+												<div class="starbox small ghosting"> </div>
+											</div>
+											<div class="clearfix"></div>
+										</div>
+											<div class="add">
+										   <button class="btn btn-danger my-cart-btn my-cart-b" data-id="<%=product.id%>" data-name="<%=product.name%>" data-summary="summary <%=product.id%>" data-price="<%=product.sale_price%>" data-quantity="1" data-image="assets/<%=product.image_url%>">Add to Cart</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<% end %>
+							<div class="clearfix"></div>
+							<%= will_paginate %>
+						 </div>
+		</div>
+	</div>
+<!--footer-->
+<div class="footer">
+	<div class="container">
+		<div class="clearfix"></div>
+		<div class="copy-right">
+			<p> &copy; 2017 Sephora. All Rights Reserved</a></p>
+		</div>
+	</div>
+</div>
+<!-- //footer-->
+
+<!-- smooth scrolling -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+		/*
+			var defaults = {
+			containerID: 'toTop', // fading element id
+			containerHoverID: 'toTopHover', // fading element hover id
+			scrollSpeed: 1200,
+			easingType: 'linear' 
+			};
+		*/								
+		$().UItoTop({ easingType: 'easeOutQuart' });
+		});
+	</script>
+	<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+<!-- //smooth scrolling -->
+<!-- for bootstrap working -->
+		<script src="/assets/bootstrap.js"></script>
+<!-- //for bootstrap working -->
+<script type='text/javascript' src="/assets/jquery.mycart.js"></script>
+  <script type="text/javascript">
+  $(function () {
+  	$('#price').change(function() {
+  		$('#filter').submit();
+  	});
+  	$('#category').change(function() {
+  		$('#filter').submit();
+  	});
+
+    var goToCartIcon = function($addTocartBtn){
+      var $cartIcon = $(".my-cart-icon");
+      var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({"position": "fixed", "z-index": "999"});
+      $addTocartBtn.prepend($image);
+      var position = $cartIcon.position();
+      $image.animate({
+        top: position.top,
+        left: position.left
+      }, 500 , "linear", function() {
+        $image.remove();
+      });
+    }
+
+    $('.my-cart-btn').myCart({
+      classCartIcon: 'my-cart-icon',
+      classCartBadge: 'my-cart-badge',
+      affixCartIcon: true,
+      checkoutCart: function(products) {
+        $.each(products, function(){
+          console.log(this);
+        });
+      },
+      clickOnAddToCart: function($addTocart){
+        goToCartIcon($addTocart);
+      },
+      getDiscountPrice: function(products) {
+        var total = 0;
+        $.each(products, function(){
+          total += this.quantity * this.price;
+        });
+        return total * 1;
+      }
+    });
+
+  });
+  </script>
+
+  
+  
+  
+  <!-- product -->
+  		<%@products.each do |product|%>
+			<div class="modal fade" id="myModal_<%=product.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content modal-info">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
+						</div>
+						<div class="modal-body modal-spa">
+								<div class="col-md-5 span-2">
+											<div class="item">
+												<img src="assets/<%=product.image_url%>" class="img-responsive" alt="">
+											</div>
+								</div>
+								<div class="col-md-7 span-1 ">
+									<h3><%=product.name%></h3>
+									<!-- <p class="in-para"> There are many variations of passages of Lorem Ipsum.</p> -->
+									<div class="price_single">
+									  <span class="reducedfrom "><del>$<%=product.price%></del>$<%=product.sale_price%></span>
+									
+									 <div class="clearfix"></div>
+									</div>
+									<h4 class="quick">Quick Overview:</h4>
+									<p class="quick_desc"><%=product.sale_text%></p>
+									 <div class="add-to">
+										   <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="<%=product.id%>" data-name="<%=product.name%>" data-summary="summary <%=product.id%>" data-price="<%=product.sale_price%>" data-quantity="1" data-image="assets/<%=product.image_url%>">Add to Cart</button>
+										</div>
+								</div>
+								<div class="clearfix"> </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		<% end %>
+
+				
